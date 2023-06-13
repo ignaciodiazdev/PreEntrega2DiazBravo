@@ -77,17 +77,55 @@ const verCarrito = () => {
     if(carrito.length === 0){
         alert('¡Tu Carrito esta Vacío!')
     }else{
-        productosCarrito = '';
-        carrito.forEach( producto => {
-            productosCarrito +=   'Nombre: ' + producto.nombre + '\n'
-                                + 'Precio: $ ' + producto.precio + '\n'
-                                + '==========================='+ '\n';
-        })
+        let productosCarrito = recorrerCarrito();
         let precioTotal = carrito.reduce((acc, producto) => acc + producto.precio, 0);
         alert('::::::::::::::::::::::::: Carrito de Compras :::::::::::::::::::::::: \n\n'
               + productosCarrito + '\n'
               + 'Total a Pagar: $ '
               + precioTotal);
+    }
+}
+
+const recorrerCarrito = () => {
+
+    let productosCarrito = '';
+    carrito.forEach( producto => {
+        productosCarrito   += 'Codigo ('+ producto.id +') \t ' 
+                            + ' Nombre: ' + producto.nombre
+                            + ' || Precio: $ '+ producto.precio + '\n';
+    })
+    return productosCarrito;
+}
+
+const eliminarProducto = () => {
+
+    if(carrito.length == 0){
+        alert('Tu Carrito aún no tiene Productos')
+    }else{
+        let productosCarrito = recorrerCarrito();
+        let id = Number(prompt(
+                        ':::::::::::::::::::::: Eliminar Producto del Carrito ::::::::::::::::::::::'
+                        + '\n\n'+ productosCarrito 
+                        + '\n Digite el Código del Producto a Eliminar:'));
+
+        let indice = carrito.findIndex( producto => producto.id == id);
+
+        if(indice !== -1){
+            carrito.splice(indice, 1);
+            alert('¡Producto Eliminado del Carrito!');
+        }else{
+            alert('¡El Producto no se encuentra en el Carrito!');
+        }
+    }
+}
+
+const vaciarCarrito = () => {
+
+    if(carrito.length == 0){
+        alert('Tu Carrito aún no tiene Productos');
+    }else{
+        carrito.splice(0, carrito.length);
+        alert('¡Vaciaste tu Carrito!')
     }
 }
 
@@ -98,7 +136,9 @@ const iniciarApp = () => {
         opc = Number(prompt('::::::::::::::::::::::::: Tienda de Celulares :::::::::::::::::::::::::\n\n'+ 
                     '1. Tienda Virtual \n'+
                     '2. Ver Carrito \n'+
-                    '3. Salir \n\n'+ 
+                    '3. Eliminar Producto \n'+ 
+                    '4. Vaciar Carrito \n'+ 
+                    '5. Salir \n\n'+ 
                     'Elija una Opción:'));
     
         if(opc === 1){
@@ -108,9 +148,15 @@ const iniciarApp = () => {
             verCarrito();
         }
         else if(opc === 3){
+            eliminarProducto();
+        }
+        else if(opc === 4){
+            vaciarCarrito();
+        }
+        else if(opc === 5){
             salir = true;
         }
-        else if( opc < 1 || opc > 3 || isNaN(opc) == true){
+        else if( opc < 1 || opc > 5 || isNaN(opc) == true){
             alert('¡Opción No Valida!')
         }
     } while ( salir == false || isNaN(opc) == true);
