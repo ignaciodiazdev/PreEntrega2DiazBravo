@@ -1,16 +1,32 @@
 
 let carrito = [];
-let productos = [
-                    {id: 1, nombre: 'Galaxy A52S', marca: 'Samsung', precio: 1439},
-                    {id: 2, nombre: 'Galaxy A32', marca: 'Samsung', precio: 859},
-                    {id: 3, nombre: 'Galaxy A22', marca: 'Samsung', precio: 729},
-                    {id: 4, nombre: 'Redmi Note 11', marca: 'Xiaomi', precio: 769},
-                    {id: 5, nombre: 'Redmi Note 11 Pro', marca: 'Xiaomi', precio: 1299},
-                    {id: 6, nombre: 'Redmi 9A', marca: 'Xiaomi', precio: 409},
-                    {id: 7, nombre: 'Iphone 11', marca: 'Apple', precio: 2828},
-                    {id: 8, nombre: 'Iphone 13', marca: 'Apple', precio: 3929},
-                    {id: 9, nombre: 'Iphone 13 Pro Max', marca: 'Apple', precio: 5599},
-                ]
+let productos = [];
+
+class Producto{
+    constructor(id, nombre, marca, precio){
+        this.id     = id;
+        this.nombre = nombre;
+        this.marca  = marca;
+        this.precio = precio;
+    }
+}
+
+const crearProductos = () => {
+
+    const prod1 = new Producto(1,'Galaxy A52S', 'Samsung', 1439);
+    const prod2 = new Producto(2,'Galaxy A32', 'Samsung', 859);
+    const prod3 = new Producto(3,'Galaxy A22', 'Samsung', 729);
+    const prod4 = new Producto(4,'Redmi Note 11', 'Xiaomi', 769);
+    const prod5 = new Producto(5,'Redmi Note 11 Pro', 'Xiaomi', 1299);
+    const prod6 = new Producto(6,'Redmi 9A', 'Xiaomi', 409);
+    const prod7 = new Producto(7,'Iphone 11', 'Apple', 2828);
+    const prod8 = new Producto(8,'Iphone 13', 'Apple', 3929);
+    const prod9 = new Producto(9,'Iphone 13 Pro Max', 'Apple', 5599);
+    
+    productos.push(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9);
+}
+
+crearProductos();
 
 const menuCategorias = () => {
     let arrayFiltrado = [];
